@@ -1,8 +1,6 @@
-name: Cuenta atrás diaria
+name: Publicar cuenta atrás
 
 on:
-  schedule:
-    - cron: "5 23 * * *"   # 00:05 (invierno) / 01:05 (verano) en Madrid
   push:
     branches: [main]
   workflow_dispatch:

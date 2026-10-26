@@ -1,30 +1,33 @@
 # Cuenta atrás para WhatsApp
 
-Página estática que muestra los días que faltan para una fecha.
-Cuando pegas el enlace en WhatsApp, la vista previa muestra una imagen con el número del día.
+Página estática con una cuenta atrás **en vivo** (días, horas, minutos y segundos).
+Se publica en GitHub Pages. Se comparte como enlace en WhatsApp.
 
-## Cómo cambiar la fecha
+## Cómo cambiar el evento
 
 Edita `config.json`:
 
 - `titulo`: nombre del evento.
 - `fecha`: fecha en formato `AAAA-MM-DD`.
+- `hora`: hora del evento (hora de Madrid).
 - `base_url`: dirección de la página en GitHub Pages.
 
 Cada `push` a `main` publica la página de nuevo.
 
 ## Cómo funciona
 
-1. `generar.py` calcula los días (hora de Madrid) y crea `dist/cuenta.png` y `dist/index.html`.
-2. La Action `.github/workflows/diario.yml` ejecuta el script cada día a las 00:05.
-3. La Action publica la carpeta `dist` en GitHub Pages. No hace commits.
+1. `generar.py` crea `dist/index.html` (desde `plantilla.html`) y `dist/cuenta.png`.
+2. La página calcula la cuenta atrás en el navegador de cada visitante. Siempre muestra el dato actual.
+3. La imagen de vista previa no lleva número. Muestra el título y la fecha.
+4. La Action `.github/workflows/diario.yml` publica la carpeta `dist`.
 
 ## Prueba en local
 
     pip install pillow
     python generar.py
 
-## Nota sobre la caché de WhatsApp
+## WhatsApp
 
-WhatsApp guarda la vista previa. Si el número parece viejo, añade un parámetro al enlace.
-Ejemplo: `https://orgia82.github.io/cuenta-atras/?d=27oct`
+- La vista previa se guarda en el mensaje cuando alguien lo envía. No se actualiza.
+- La página sí se actualiza cuando alguien toca el enlace.
+- Un mensaje anclado dura como máximo 30 días.
